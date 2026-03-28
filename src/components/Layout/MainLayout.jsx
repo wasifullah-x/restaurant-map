@@ -19,8 +19,8 @@ function MainLayout({
   ]
 
   return (
-    <div className="h-screen overflow-hidden bg-[#f8faf8] text-[#1a2e1a] dark:bg-app-background dark:text-app-text-primary">
-      <header className="border-b border-[#d1ddd1] bg-white/95 backdrop-blur-sm dark:border-app-border dark:bg-app-surface/95">
+    <div className="flex h-dvh flex-col overflow-hidden bg-[#f8faf8] text-[#1a2e1a] dark:bg-app-background dark:text-app-text-primary">
+      <header className="shrink-0 border-b border-[#d1ddd1] bg-white/95 backdrop-blur-sm dark:border-app-border dark:bg-app-surface/95">
         <div className="mx-auto w-full px-4 py-2 md:flex md:h-[72px] md:items-center md:justify-between md:px-6 md:py-0">
           <div className="flex items-center justify-between md:min-w-[240px]">
             <div className="text-xl font-extrabold tracking-wide text-app-highlight">Verdant Halal</div>
@@ -105,26 +105,27 @@ function MainLayout({
         </div>
       </header>
 
-      <main className="h-[calc(100vh-72px)]">
+      <main className="relative min-h-0 flex-1">
         <div className="hidden h-full md:grid md:grid-cols-[45%_55%]">
           <section className="h-full overflow-hidden border-r border-[#d1ddd1] bg-[#f8faf8] dark:border-app-border dark:bg-app-surface">{sidebar}</section>
           <section className="h-full bg-[#f8faf8] dark:bg-app-background">{map}</section>
         </div>
 
-        <div className="relative h-full md:hidden">
+        <div className="relative h-full pb-20 md:hidden">
           {mobileView === 'map' ? (
-            <section className="h-full w-full bg-[#f8faf8] dark:bg-app-background">{map}</section>
+            <section className="animate-fade-up h-full w-full bg-[#f8faf8] dark:bg-app-background">{map}</section>
           ) : hasSelectedRestaurant ? (
-            <section className="h-full w-full overflow-hidden bg-[#f8faf8] dark:bg-app-surface">{sidebar}</section>
+            <section className="animate-fade-up h-full w-full overflow-hidden bg-[#f8faf8] dark:bg-app-surface">{sidebar}</section>
           ) : (
-            <section className="h-full w-full overflow-hidden bg-[#f8faf8] dark:bg-app-surface">{sidebar}</section>
+            <section className="animate-fade-up h-full w-full overflow-hidden bg-[#f8faf8] dark:bg-app-surface">{sidebar}</section>
           )}
 
           {!hasSelectedRestaurant && (
             <button
               type="button"
               onClick={onToggleMobileView}
-              className="absolute bottom-4 left-1/2 z-[1200] -translate-x-1/2 rounded-full bg-app-primary px-5 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.02]"
+              className="fixed bottom-4 left-1/2 z-[1300] -translate-x-1/2 rounded-full border border-white/20 bg-app-primary/95 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:bg-app-accent"
+              style={{ bottom: 'max(1rem, env(safe-area-inset-bottom))' }}
             >
               {mobileView === 'list' ? 'Show Map' : 'Show List'}
             </button>

@@ -1,0 +1,7 @@
+services:
+  app:
+    image: restaurant-system:1.0.0
+    container_name: restaurant-system
+    ports:
+      - "8080:80"
+    restart: unless-stopped

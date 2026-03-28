@@ -39,7 +39,7 @@ function Home() {
   const { restaurants, loading, error, retry } = useRestaurants()
   const [theme, setTheme] = useState(() => {
     if (typeof window === 'undefined') {
-      return 'dark'
+      return 'light'
     }
 
     const savedTheme = window.localStorage.getItem('halal-finder-theme')
@@ -47,7 +47,7 @@ function Home() {
       return savedTheme
     }
 
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    return 'light'
   })
   const [query, setQuery] = useState('')
   const [selectedCuisine, setSelectedCuisine] = useState('All Cuisines')
